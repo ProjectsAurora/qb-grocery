@@ -11,7 +11,7 @@ QBCore.Functions.CreateCallback('shop:getShopItems', function(source, cb, shopId
 end)
 
 RegisterServerEvent('shop:purchaseItem')
-AddEventHandler('shop:purchaseItem', function(itemName, itemPrice, shopId)
+AddEventHandler('shop:purchaseItem', function(itemName, itemPrice, quantity, shopId)
     local src = source
     local player = QBCore.Functions.GetPlayer(src)
     local shop = Config.Shops[shopId]
@@ -25,16 +25,19 @@ AddEventHandler('shop:purchaseItem', function(itemName, itemPrice, shopId)
             end
         end
 
-        if item and item.stock > 0 then
-            if player.Functions.RemoveMoney('cash', itemPrice) then
-                player.Functions.AddItem(item.name, 1)
-                item.stock = item.stock - 1
+        if item and item.stock >= quantity then
+            local totalPrice = itemPrice * quantity
+            if player.Functions.RemoveMoney('cash', totalPrice) then
+                player.Functions.AddItem(item.name, quantity)
+                item.stock = item.stock - quantity
                 TriggerClientEvent('QBCore:Notify', src, "Item purchased!", "success")
             else
                 TriggerClientEvent('QBCore:Notify', src, "Not enough money!", "error")
             end
+        elseif item and item.stock < quantity then
+            TriggerClientEvent('QBCore:Notify', src, "Not enough stock!", "error")
         else
-            TriggerClientEvent('QBCore:Notify', src, "Item out of stock!", "error")
+            TriggerClientEvent('QBCore:Notify', src, "Item not found!", "error")
         end
     else
         TriggerClientEvent('QBCore:Notify', src, "Shop not found!", "error")

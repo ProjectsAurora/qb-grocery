@@ -11,9 +11,9 @@ Config.Shops = {
         maxZ = 6.04,
         icon = "fas fa-carrot",
         items = {
-            {name = "sandwich", label = "Sandwich", price = 5, stock = 10},
-            {name = "Lettuce", label = "Lettuce", price = 7, stock = 8},
-            {name = "Tomato", label = "Tomato", price = 6, stock = 12}
+            {name = "cheese", label = "Cheese", price = 5, stock = 10},
+            {name = "Lettuce", label = "Lettuce", price = 7, stock = 10},
+            {name = "Tomato", label = "Tomato", price = 6, stock = 10}
         }
     },
     ["Meat"] = {
@@ -42,8 +42,8 @@ Config.Shops = {
         icon = "fas fa-snowflake",
         items = {
             {name = "Ice Cream", label = "Ice Cream", price = 10, stock = 10},
-            {name = "Frozen Pizza", label = "Frozen Pizza", price = 15, stock = 8},
-            {name = "Frozen Vegetables", label = "Frozen Vegetables", price = 8, stock = 12}
+            {name = "Frozen Pizza", label = "Frozen Burgers", price = 15, stock = 8},
+            {name = "Frozen Vegetables", label = "Frozen Nuggets", price = 8, stock = 12}
         }
     },
     ["Drinks"] = {

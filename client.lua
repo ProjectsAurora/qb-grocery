@@ -55,11 +55,12 @@ AddEventHandler('shop:showShopMenu', function(shop)
                 txt = "Purchase " .. item.label .. " for $" .. item.price,
                 icon = "fas fa-shopping-cart",
                 params = {
-                    event = "shop:purchaseItem",
+                    event = "shop:requestPurchaseQuantity",
                     args = {
                         itemName = item.name,
                         itemPrice = item.price,
-                        shopId = shop.shopName
+                        shopId = shop.shopName,
+                        maxAmount = item.stock -- Pass the maximum stock available
                     }
                 }
             })
@@ -76,7 +77,29 @@ AddEventHandler('shop:showShopMenu', function(shop)
     exports['qb-menu']:openMenu(elements)
 end)
 
-RegisterNetEvent('shop:purchaseItem')
-AddEventHandler('shop:purchaseItem', function(data)
-    TriggerServerEvent('shop:purchaseItem', data.itemName, data.itemPrice, data.shopId)
+RegisterNetEvent('shop:requestPurchaseQuantity')
+AddEventHandler('shop:requestPurchaseQuantity', function(data)
+    local sellingItem = exports['qb-input']:ShowInput({
+        header = 'Enter Quantity',
+        submitText = 'Purchase',
+        inputs = {
+            {
+                type = 'number',
+                isRequired = true,
+                name = 'amount',
+                text = 'Max: ' .. data.maxAmount
+            }
+        }
+    })
+
+    if sellingItem then
+        local quantity = tonumber(sellingItem.amount)
+        if quantity and quantity > 0 and quantity <= data.maxAmount then
+            TriggerServerEvent('shop:purchaseItem', data.itemName, data.itemPrice, quantity, data.shopId)
+        else
+            TriggerEvent('QBCore:Notify', "Invalid quantity entered. Please enter a number between 1 and " .. data.maxAmount .. ".", "error")
+        end
+    else
+        TriggerEvent('QBCore:Notify', "No quantity entered.", "error")
+    end
 end)
