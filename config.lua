@@ -11,9 +11,9 @@ Config.Shops = {
         maxZ = 6.04,
         icon = "fas fa-carrot", -- Icon for the menu
         items = {
-            {name = "carrot", price = 5},
-            {name = "lettuce", price = 7},
-            {name = "tomato", price = 6}
+            {name = "Carrot", price = 5},
+            {name = "Lettuce", price = 7},
+            {name = "Tomato", price = 6}
         }
     },
     [2] = {
@@ -26,9 +26,9 @@ Config.Shops = {
         maxZ = 6.03,
         icon = "fas fa-drumstick-bite", -- Icon for the menu
         items = {
-            {name = "steak", price = 20},
-            {name = "chicken", price = 15},
-            {name = "pork", price = 18}
+            {name = "Steak", price = 20},
+            {name = "Chicken", price = 15},
+            {name = "Pork", price = 18}
         }
     },
     [3] = {
@@ -41,9 +41,9 @@ Config.Shops = {
         maxZ = 6.2,
         icon = "fas fa-snowflake", -- Icon for the menu
         items = {
-            {name = "ice_cream", price = 10},
-            {name = "frozen_pizza", price = 15},
-            {name = "frozen_vegetables", price = 8}
+            {name = "Ice Cream", price = 10},
+            {name = "Frozen Pizza", price = 15},
+            {name = "Frozen Vegetables", price = 8}
         }
     },
     [4] = {
@@ -56,9 +56,9 @@ Config.Shops = {
         maxZ = 5.3,
         icon = "fas fa-cocktail", -- Icon for the menu
         items = {
-            {name = "beer", price = 5},
-            {name = "whiskey", price = 20},
-            {name = "vodka", price = 25}
+            {name = "Beer", price = 5},
+            {name = "Whiskey", price = 20},
+            {name = "Vodka", price = 25}
         }
     },
     [5] = {
@@ -71,9 +71,9 @@ Config.Shops = {
         maxZ = 105.6,
         icon = "fas fa-cheese", -- Icon for the menu
         items = {
-            {name = "milk", price = 3},
-            {name = "cheese", price = 5},
-            {name = "yogurt", price = 4}
+            {name = "Milk", price = 3},
+            {name = "Cheese", price = 5},
+            {name = "Yogurt", price = 4}
         }
     }
 }
