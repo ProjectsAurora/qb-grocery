@@ -1,6 +1,18 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 Citizen.CreateThread(function()
+    -- Create Blip for the grocery store
+    local blip = AddBlipForCoord(Config.Blip.coords)
+    SetBlipSprite(blip, Config.Blip.sprite)
+    SetBlipDisplay(blip, 4)
+    SetBlipScale(blip, 0.7)
+    SetBlipColour(blip, Config.Blip.color)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString(Config.Blip.name)
+    EndTextCommandSetBlipName(blip)
+
+    -- Add Target Zones for each shop
     for k, shop in pairs(Config.Shops) do
         exports['qb-target']:AddBoxZone(shop.shopName, shop.coords, shop.boxZone[1], shop.boxZone[2], {
             name = shop.shopName,
