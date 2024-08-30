@@ -16,6 +16,7 @@
 
 - **qb-input**: For handling input interactions.
 - **qb-menu**: For creating and managing menus.
+- **qb-target**: for targeting areas.
 
 ## Installation
 
