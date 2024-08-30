@@ -4,7 +4,7 @@ Config = {}
 Config.Blip = {
     coords = vector3(-1120.73, -1363.57, 5.04),
     sprite = 52,
-    color = 2,
+    color = 8,
     name = "Grocery Store"
 }
 
@@ -23,19 +23,44 @@ Config.RestockLocation = {
     maxZ = 6.0
 }
 
-
 -- Storage Location Configuration
 Config.StorageLocation = {
     name = "GroceryStorage",
     coords = vector3(-1121.38, -1352.74, 5.04), -- Updated coordinates
     heading = 347.27,
-    minZ = 2.0, -- Adjusted based on the subtraction of 2
-    maxZ = 8.0, -- Adjusted based on the addition of 2
+    minZ = 2.0, 
+    maxZ = 8.0, 
     size = {x = 0.9, y = 0.9}, -- Size of the target zone
 }
 
 -- Job Name Configuration
 Config.Jobname = "grocery" -- Don't change unless you know what you're doing 
+
+
+-- Config for delivery jobs
+Config.DeliveryJobs = {
+    Locations = {
+        { coords = vector3(-41.79, 1884.18, 195.52), payment = 100 },
+        { coords = vector3(1552.2, 2189.59, 78.84), payment = 100 },
+        { coords = vector3(1332.48, 4325.15, 38.25), payment = 100 },
+        -- Add more delivery locations here
+    }
+}
+
+-- Config for starting delivery location 
+Config.StartingPed = {
+    Locations = {
+        {
+            id = 1,
+            coords = vector3(-1112.85, -1370.41, 5.13), -- Example coordinates
+            heading = 0, 
+            minZ = 4.0, 
+            maxZ = 6.0, 
+        },
+        -- Add more starting locations here
+    }
+}
+
 
 -- Shops Configuration
 Config.Shops = {
@@ -50,8 +75,8 @@ Config.Shops = {
         icon = "fas fa-carrot",
         items = {
             {name = "cheese", label = "Cheese", price = 5, stock = 50},
-            {name = "lettuce", label = "Lettuce", price = 7, stock = 50}, -- Corrected case for "lettuce"
-            {name = "tomato", label = "Tomato", price = 6, stock = 50} -- Corrected case for "tomato"
+            {name = "lettuce", label = "Lettuce", price = 7, stock = 50}, 
+            {name = "tomato", label = "Tomato", price = 6, stock = 50} 
         }
     },
     ["Meat"] = {
@@ -64,9 +89,9 @@ Config.Shops = {
         maxZ = 6.03,
         icon = "fas fa-drumstick-bite",
         items = {
-            {name = "steak", label = "Steak", price = 20, stock = 50}, -- Corrected case for "steak"
-            {name = "chicken", label = "Chicken", price = 15, stock = 50}, -- Corrected case for "chicken"
-            {name = "pork", label = "Pork", price = 18, stock = 50} -- Corrected case for "pork"
+            {name = "steak", label = "Steak", price = 20, stock = 50}, 
+            {name = "chicken", label = "Chicken", price = 15, stock = 50}, 
+            {name = "pork", label = "Pork", price = 18, stock = 50} 
         }
     },
     ["Frozen Foods"] = {
@@ -79,9 +104,9 @@ Config.Shops = {
         maxZ = 6.2,
         icon = "fas fa-snowflake",
         items = {
-            {name = "icecream", label = "Ice Cream", price = 10, stock = 50}, -- Corrected case for "icecream"
-            {name = "frozenpizza", label = "Frozen Burgers", price = 15, stock = 50}, -- Corrected case for "frozenpizza"
-            {name = "frozenvegetables", label = "Frozen Nuggets", price = 8, stock = 50} -- Corrected case for "frozenvegetables"
+            {name = "icecream", label = "Ice Cream", price = 10, stock = 50}, 
+            {name = "frozenpizza", label = "Frozen Burgers", price = 15, stock = 50}, 
+            {name = "frozenvegetables", label = "Frozen Nuggets", price = 8, stock = 50}
         }
     },
     ["Drinks"] = {
@@ -109,9 +134,9 @@ Config.Shops = {
         maxZ = 105.6,
         icon = "fas fa-cheese",
         items = {
-            {name = "milk", label = "Milk", price = 3, stock = 50}, -- Corrected case for "milk"
-            {name = "cheese", label = "Cheese", price = 5, stock = 50}, -- Corrected case for "cheese"
-            {name = "yogurt", label = "Yogurt", price = 4, stock = 50} -- Corrected case for "yogurt"
+            {name = "milk", label = "Milk", price = 3, stock = 50}, 
+            {name = "cheese", label = "Cheese", price = 5, stock = 50}, 
+            {name = "yogurt", label = "Yogurt", price = 4, stock = 50} 
         }
     }
 }
