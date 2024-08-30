@@ -219,7 +219,7 @@ exports['qb-target']:AddBoxZone("GroceryClock", vector3(-1119.49, -1351.53, 5.04
     name = "GroceryClock",
     heading = 347.27,
     debugPoly = false,
-    minZ = 04.38 - 2,
+    minZ = 05.04 - 2,
     maxZ = 06.38 + 2,
 }, {
     options = {
