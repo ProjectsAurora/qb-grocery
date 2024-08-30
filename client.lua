@@ -113,7 +113,7 @@ end)
 
 Citizen.CreateThread(function()
     QBCore.Functions.GetPlayerData(function(data)
-        if data.job.name == Config.Jobname then
+        if data.job and data.job.name == Config.Jobname then
             exports['qb-target']:AddBoxZone("RestockLocation", Config.RestockLocation.coords, Config.RestockLocation.radius, Config.RestockLocation.radius, {
                 name = "RestockLocation",
                 heading = Config.RestockLocation.heading,
