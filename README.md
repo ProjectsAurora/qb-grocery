@@ -25,12 +25,6 @@
    - **Note**: If you are using `qb-inventory`, ensure you change line 87 in the server script to reference `qb-inventory`.
 4. **Deploy**: Add the script to your resources and restart the server.
 
-## Customization
-
-- **Job Roles**: Adjust roles and permissions.
-- **Stock Levels**: Configure inventory management to fit your server’s economy.
-- **MLO Settings**: Integrate with existing assets.
-
 ## Future Goals
 
 - **Delivery Missions**: Add missions for employees to deliver stock, enhancing realism and player engagement.
