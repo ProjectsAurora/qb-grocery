@@ -3,6 +3,13 @@ local QBCore = exports['qb-core']:GetCoreObject()
 -- Callback to get shop items
 QBCore.Functions.CreateCallback('shop:getShopItems', function(source, cb, shopId)
     local shop = Config.Shops[shopId]
+    if not shop then
+        print("Error: Shop not found for shopId", shopId)
+    elseif not shop.items then
+        print("Error: Items are nil for shopId", shopId)
+    else
+        print("Shop found:", shopId, shop)
+    end
     cb(shop or nil)
 end)
 
@@ -13,36 +20,45 @@ AddEventHandler('shop:purchaseItem', function(itemName, itemPrice, quantity, sho
     local player = QBCore.Functions.GetPlayer(src)
     local shop = Config.Shops[shopId]
 
-    if shop then
-        local item = nil
-        for _, i in pairs(shop.items) do
-            if i.name == itemName then
-                item = i
-                break
-            end
-        end
+    if not shop then
+        TriggerClientEvent('QBCore:Notify', src, "Shop not found!", "error")
+        print("Error: Shop not found for shopId", shopId)
+        return
+    end
 
-        if item then
-            if item.stock >= quantity then
-                local totalPrice = itemPrice * quantity
-                if player.Functions.RemoveMoney('cash', totalPrice) then
-                    player.Functions.AddItem(item.name, quantity)
-                    item.stock = item.stock - quantity
-                    TriggerClientEvent('QBCore:Notify', src, "Item purchased!", "success")
-                    TriggerClientEvent('shop:updateShopMenu', src, shopId)
-                else
-                    TriggerClientEvent('QBCore:Notify', src, "Not enough money!", "error")
-                end
+    if not shop.items then
+        TriggerClientEvent('QBCore:Notify', src, "Items not available!", "error")
+        print("Error: Items are nil for shopId", shopId)
+        return
+    end
+
+    local item = nil
+    for _, i in pairs(shop.items) do
+        if i.name == itemName then
+            item = i
+            break
+        end
+    end
+
+    if item then
+        if item.stock >= quantity then
+            local totalPrice = itemPrice * quantity
+            if player.Functions.RemoveMoney('cash', totalPrice) then
+                player.Functions.AddItem(item.name, quantity)
+                item.stock = item.stock - quantity
+                TriggerClientEvent('QBCore:Notify', src, "Item purchased!", "success")
+                TriggerClientEvent('shop:updateShopMenu', src, shopId)
             else
-                TriggerClientEvent('QBCore:Notify', src, "Not enough stock!", "error")
+                TriggerClientEvent('QBCore:Notify', src, "Not enough money!", "error")
             end
         else
-            TriggerClientEvent('QBCore:Notify', src, "Item not found!", "error")
+            TriggerClientEvent('QBCore:Notify', src, "Not enough stock!", "error")
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, "Shop not found!", "error")
+        TriggerClientEvent('QBCore:Notify', src, "Item not found!", "error")
     end
 end)
+
 
 -- Event to handle restock at specific location
 RegisterServerEvent('restock:restockAtLocation')
@@ -117,3 +133,28 @@ AddEventHandler('restock:attemptRestock', function(restockCost)
         TriggerClientEvent('QBCore:Notify', src, "You don't have permission to restock this store.", "error")
     end
 end)
+
+QBCore.Functions.CreateCallback('qb-grocery:server:getAllStock', function(source, cb)
+    if not Config.Shops then
+        print("Error: Config.Shops is nil.")
+        cb({})
+        return
+    end
+
+    local stockData = {}
+
+    for shopName, shopData in pairs(Config.Shops) do
+        if shopData and shopData.items then
+            table.insert(stockData, {
+                shopName = shopData.shopName,
+                items = shopData.items
+            })
+        else
+            print("Error: Missing shop data or items for shop: " .. tostring(shopName))
+        end
+    end
+    
+    cb(stockData)
+end)
+
+

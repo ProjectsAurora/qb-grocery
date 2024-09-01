@@ -112,29 +112,30 @@ AddEventHandler('shop:requestPurchaseQuantity', function(data)
 end)
 
 Citizen.CreateThread(function()
-    QBCore.Functions.GetPlayerData(function(data)
-        if data.job and data.job.name == Config.Jobname then
-            exports['qb-target']:AddBoxZone("RestockLocation", Config.RestockLocation.coords, Config.RestockLocation.radius, Config.RestockLocation.radius, {
-                name = "RestockLocation",
-                heading = Config.RestockLocation.heading,
-                debugPoly = false,
-                minZ = Config.RestockLocation.minZ,
-                maxZ = Config.RestockLocation.maxZ
-            }, {
-                options = {
-                    {
-                        type = "client",
-                        event = "restock:openRestockMenu",
-                        icon = "fas fa-box",
-                        label = "Restock",
-                        job = Config.Jobname
-                    }
-                },
-                distance = 2.5
-            })
-        end
-    end)
+    if Config and Config.RestockLocation then
+        exports['qb-target']:AddBoxZone("RestockLocation", Config.RestockLocation.coords, Config.RestockLocation.size.x, Config.RestockLocation.size.y, {
+            name = "RestockLocation",
+            heading = Config.RestockLocation.heading,
+            debugPoly = false,
+            minZ = Config.RestockLocation.minZ,
+            maxZ = Config.RestockLocation.maxZ,
+        }, {
+            options = {
+                {
+                    type = "client",
+                    event = "restock:openRestockMenu",
+                    icon = "fas fa-box",
+                    label = "Restock",
+                    job = "grocery"  -- Ensure this matches your job name exactly
+                }
+            },
+            distance = 2.5
+        })
+    else
+        print("Error: Config or Config.RestockLocation is nil.")
+    end
 end)
+
 
 RegisterNetEvent('restock:openRestockMenu')
 AddEventHandler('restock:openRestockMenu', function()
@@ -197,7 +198,7 @@ Citizen.CreateThread(function()
                 {
                     type = "client",
                     event = "qb-grocery:client:bjobFridge",
-                    icon = "fas fa-temperature-empty",
+                    icon = "fa-solid fa-box",
                     label = "Storage",
                     job = "grocery",  -- Ensure this matches your job name exactly
                 }
@@ -245,5 +246,6 @@ exports['qb-target']:AddBoxZone("GroceryClock", vector3(-1119.49, -1351.53, 5.04
 RegisterNetEvent('qb-grocery:client:ToggleDuty', function()
     TriggerServerEvent("QBCore:ToggleDuty")
 end)
+
 
 

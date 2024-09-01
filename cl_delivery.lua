@@ -8,7 +8,7 @@ local deliveryTargetId = nil
 ----- | SPAWNING A CIRCLE TARGET FOR DELIVERY START | -----
 Citizen.CreateThread(function()
     -- Create a circle target for starting the delivery job
-    for _, location in ipairs(Config.StartingPed.Locations) do
+    for _, location in ipairs(Config.DeliveryStart.Locations) do
         local coords = location.coords
         exports['qb-target']:AddCircleZone("StartDelivery_" .. location.id, coords, 1.0, {
             name = "StartDelivery_" .. location.id,

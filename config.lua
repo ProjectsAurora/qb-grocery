@@ -10,18 +10,21 @@ Config.Blip = {
 
 -- Restock Configuration
 Config.Restock = {
+    autoRestock = true, -- Set to true to enable auto restock, false to disable
     maxStock = 50, -- Maximum stock level after restock
     timer = 120, -- Timer for restock in seconds (e.g., 3600 seconds = 1 hour)
     cost = 1000 -- Cost for restocking
 }
 
+
 Config.RestockLocation = {
-    coords = vector3(-1110.37, -1361.77, 5.04), -- Example coordinates
-    radius = 3.0, -- Radius for the interaction zone
-    heading = 0,
-    minZ = 4.0,
-    maxZ = 6.0
+    coords = vector3(-1119.51, -1349.64, 5.04),  -- Replace with your coordinates
+    size = {x = 1.0, y = 1.0},  -- Size of the target zone
+    heading = 0,  -- Heading for the zone
+    minZ = 5.00,  -- Minimum Z coordinate
+    maxZ = 6.42  -- Maximum Z coordinate
 }
+
 
 -- Storage Location Configuration
 Config.StorageLocation = {
@@ -43,12 +46,12 @@ Config.DeliveryJobs = {
         { coords = vector3(-41.79, 1884.18, 195.52), payment = 100 },
         { coords = vector3(1552.2, 2189.59, 78.84), payment = 100 },
         { coords = vector3(1332.48, 4325.15, 38.25), payment = 100 },
-        -- Add more delivery locations here
+        -- Add more delivery locations here i added money so if further better pay
     }
 }
 
 -- Config for starting delivery location 
-Config.StartingPed = {
+Config.DeliveryStart = {
     Locations = {
         {
             id = 1,
